@@ -1,6 +1,9 @@
+import 'package:coworker/config/appwrite.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Appwrite.init();
   runApp(const MyApp());
 }
 
