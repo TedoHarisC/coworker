@@ -1,4 +1,4 @@
-package com.example.coworker
+package com.tedo.coworker
 
 import io.flutter.embedding.android.FlutterActivity
 
