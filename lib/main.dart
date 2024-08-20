@@ -2,6 +2,8 @@ import 'package:coworker/config/app_color.dart';
 import 'package:coworker/config/appwrite.dart';
 import 'package:coworker/config/enums.dart';
 import 'package:coworker/pages/get_started_page.dart';
+import 'package:coworker/pages/sign_in_page.dart';
+import 'package:coworker/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Coworkers App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.light(
         useMaterial3: true,
       ).copyWith(
@@ -47,6 +50,8 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoute.getStarted.name,
       routes: {
         AppRoute.getStarted.name: (context) => const GetStartedPage(),
+        AppRoute.signUp.name: (context) => const SignUpPage(),
+        AppRoute.signIn.name: (context) => const SignInPage(),
       },
     );
   }

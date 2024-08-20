@@ -1,3 +1,4 @@
+import 'package:coworker/config/enums.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,9 @@ class GetStartedPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoute.signUp.name);
+                },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
