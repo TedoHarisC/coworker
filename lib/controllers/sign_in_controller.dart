@@ -1,4 +1,6 @@
 import 'package:coworker/config/app_info.dart';
+import 'package:coworker/config/enums.dart';
+import 'package:coworker/config/session.dart';
 import 'package:coworker/datasources/user_datasource.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,8 +48,12 @@ class SignInController extends GetxController {
       value.fold((message) {
         AppInfo.failed(context, message);
       }, (data) {
+        // Save ke Session App
+        AppSession.setUser(data);
+        // Memunculkan toast untuk menunjukkan bahwa sukses untuk login
         AppInfo.toastSucces('Sign In Berhasil');
-        // Save ke Session App da Navigasi
+        // Navigator ke Dashboard setelah sign in
+        Navigator.pushReplacementNamed(context, AppRoute.dashboard.name);
       });
     });
   }

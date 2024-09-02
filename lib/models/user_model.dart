@@ -19,7 +19,7 @@ class UserModel {
     this.$updatedAt,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory UserModel.fromJson(Map<dynamic, dynamic> json) => UserModel(
         name: json["name"],
         email: json["email"],
         $id: json["\$id"],

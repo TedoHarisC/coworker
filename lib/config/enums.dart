@@ -2,7 +2,7 @@ enum AppRoute {
   getStarted,
   signUp,
   signIn,
-  dshboard,
+  dashboard,
   listWorker,
   workerProfile,
   booking,

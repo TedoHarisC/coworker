@@ -1,9 +1,12 @@
 import 'package:coworker/config/app_color.dart';
 import 'package:coworker/config/appwrite.dart';
 import 'package:coworker/config/enums.dart';
+import 'package:coworker/config/session.dart';
+import 'package:coworker/pages/dashboard_page.dart';
 import 'package:coworker/pages/get_started_page.dart';
 import 'package:coworker/pages/sign_in_page.dart';
 import 'package:coworker/pages/sign_up_page.dart';
+import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -48,11 +51,24 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: AppRoute.getStarted.name,
+      initialRoute: AppRoute.dashboard.name,
       routes: {
         AppRoute.getStarted.name: (context) => const GetStartedPage(),
         AppRoute.signUp.name: (context) => const SignUpPage(),
         AppRoute.signIn.name: (context) => const SignInPage(),
+        AppRoute.dashboard.name: (context) {
+          return FutureBuilder(
+              future: AppSession.getUser(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return DView.loadingCircle();
+                }
+                if (snapshot.data == null) {
+                  return const GetStartedPage();
+                }
+                return const DashboardPage();
+              });
+        },
       },
     );
   }
