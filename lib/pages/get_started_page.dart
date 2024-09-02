@@ -65,7 +65,7 @@ class GetStartedPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FilledButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoute.signUp.name);
+                  Navigator.pushNamed(context, AppRoute.signIn.name);
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
