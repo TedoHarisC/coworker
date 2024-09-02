@@ -1,3 +1,5 @@
+import 'package:coworker/widgets/input_auth.dart';
+import 'package:coworker/widgets/input_auth_password.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +55,30 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
           DView.height(50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                InputAuth(
+                  editingController: TextEditingController(),
+                  hint: 'Write your name',
+                  title: 'Complete Name',
+                ),
+                DView.height(),
+                InputAuth(
+                  editingController: TextEditingController(),
+                  hint: 'Write your email',
+                  title: 'Email Address',
+                ),
+                DView.height(),
+                InputAuthPassword(
+                  editingController: TextEditingController(),
+                  hint: 'Write your password',
+                  title: 'Password',
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
