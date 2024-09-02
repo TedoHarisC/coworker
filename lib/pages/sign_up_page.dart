@@ -1,11 +1,26 @@
+import 'package:coworker/controllers/sign_up_controller.dart';
 import 'package:coworker/widgets/input_auth.dart';
 import 'package:coworker/widgets/input_auth_password.dart';
 import 'package:coworker/widgets/secondary_button.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final signUpController = Get.put(SignUpController());
+
+  @override
+  void dispose() {
+    signUpController.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,19 +76,19 @@ class SignUpPage extends StatelessWidget {
             child: Column(
               children: [
                 InputAuth(
-                  editingController: TextEditingController(),
+                  editingController: signUpController.edtName,
                   hint: 'Write your name',
                   title: 'Complete Name',
                 ),
                 DView.height(),
                 InputAuth(
-                  editingController: TextEditingController(),
+                  editingController: signUpController.edtEmail,
                   hint: 'Write your email',
                   title: 'Email Address',
                 ),
                 DView.height(),
                 InputAuthPassword(
-                  editingController: TextEditingController(),
+                  editingController: signUpController.edtPassword,
                   hint: 'Write your password',
                   title: 'Password',
                 ),
@@ -105,10 +120,16 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
                 DView.height(30),
-                FilledButton(
-                  onPressed: () {},
-                  child: const Text('Sign Up'),
-                ),
+                Obx(() {
+                  bool loading = signUpController.loading;
+                  if (loading) return DView.loadingCircle();
+                  return FilledButton(
+                    onPressed: () {
+                      signUpController.execute(context);
+                    },
+                    child: const Text('Sign Up'),
+                  );
+                }),
                 DView.height(),
                 SecondaryButton(
                   onPressed: () {},

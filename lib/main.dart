@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(
         useMaterial3: true,
       ).copyWith(
+        scaffoldBackgroundColor: Colors.white,
         textTheme: GoogleFonts.poppinsTextTheme().apply(
           bodyColor: AppColor.text,
           displayColor: AppColor.text,
