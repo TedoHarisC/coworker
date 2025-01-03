@@ -1,5 +1,6 @@
 import 'package:coworker/controllers/fragments/browser_controller.dart';
 import 'package:coworker/controllers/user_controller.dart';
+import 'package:coworker/widgets/section_title.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,7 +64,93 @@ class _BrowserFragmentState extends State<BrowserFragment> {
             ],
           ),
         ),
+        DView.height(50),
+        latestStats(),
+        DView.height(30),
       ],
+    );
+  }
+
+  Widget latestStats() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionTitle(text: 'Latest Stats'),
+          DView.height(),
+          Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'assets/ic_hired_stats.png',
+                      width: 46,
+                      height: 46,
+                    ),
+                    DView.width(12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '12,882',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'Hired',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'assets/ic_money_spend.png',
+                      width: 46,
+                      height: 46,
+                    ),
+                    DView.width(12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '89,390',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'Expense',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
