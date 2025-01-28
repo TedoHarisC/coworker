@@ -1,7 +1,6 @@
 import 'package:coworker/controllers/fragments/browser_controller.dart';
 import 'package:coworker/controllers/user_controller.dart';
 import 'package:d_view/d_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
