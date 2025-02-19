@@ -71,6 +71,8 @@ class _BrowserFragmentState extends State<BrowserFragment> {
         DView.height(30),
         newComers(),
         DView.height(30),
+        curatedTips(),
+        DView.height(30),
       ],
     );
   }
@@ -145,6 +147,85 @@ class _BrowserFragmentState extends State<BrowserFragment> {
           },
         ),
       ],
+    );
+  }
+
+  Widget curatedTips() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionTitle(
+            text: 'Curated Tips',
+          ),
+          Column(
+            children: browseController.curatedTips.map((item) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  children: [
+                    Stack(
+                      children: [
+                        Image.asset(
+                          item['image'],
+                          width: 70,
+                          height: 70,
+                        ),
+                        if (item['is_popular'])
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: Color(0xffBFA8FF),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(16),
+                                  bottomRight: Radius.circular(16),
+                                ),
+                              ),
+                              height: 24,
+                              child: const Text(
+                                'Popular',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1,
+                                ),
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                    DView.width(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item['name'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          item['category'],
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            }).toList(),
+          )
+        ],
+      ),
     );
   }
 
