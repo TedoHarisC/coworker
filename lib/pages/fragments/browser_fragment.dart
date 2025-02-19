@@ -68,7 +68,82 @@ class _BrowserFragmentState extends State<BrowserFragment> {
         latestStats(),
         DView.height(30),
         highRatedWorkers(),
-        DView.height(30)
+        DView.height(30),
+        newComers(),
+        DView.height(30),
+      ],
+    );
+  }
+
+  Widget newComers() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionTitle(
+          text: 'New Comers',
+          autoPadding: true,
+        ),
+        DView.height(),
+        GridView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 74,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: browseController.newcomers.length,
+          itemBuilder: (context, index) {
+            Map comer = browseController.newcomers[index];
+            return Container(
+              width: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: const Color(0xffeaeaea),
+                ),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    comer['image'],
+                    width: 46,
+                    height: 46,
+                  ),
+                  DView.width(12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          comer['name'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          comer['job'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
       ],
     );
   }
