@@ -25,7 +25,7 @@ class Appwrite {
     databases = Databases(client);
   }
 
-  String imageURL(String fileId) {
+  static String imageURL(String fileId) {
     return '$endPoint/storage/buckets/$bucketWorker/files/$fileId/view?project=$projectId';
   }
 }

@@ -12,7 +12,7 @@ class WorkerModel {
   String category;
   String $id;
   String $createdAt;
-  String $deletedAt;
+  String $updatedAt;
 
   WorkerModel({
     required this.image,
@@ -28,7 +28,7 @@ class WorkerModel {
     required this.category,
     required this.$id,
     required this.$createdAt,
-    required this.$deletedAt,
+    required this.$updatedAt,
   });
 
   factory WorkerModel.fromJson(Map<String, dynamic> json) => WorkerModel(
@@ -45,7 +45,7 @@ class WorkerModel {
         category: json["category"],
         $id: json["\$id"],
         $createdAt: json["\$createdAt"],
-        $deletedAt: json["\$deletedAt"],
+        $updatedAt: json["\$updatedAt"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,6 +62,6 @@ class WorkerModel {
         "category": category,
         "\$id": $id,
         "\$createdAt": $createdAt,
-        "\$deletedAt": $deletedAt,
+        "\$updatedAt": $updatedAt,
       };
 }
