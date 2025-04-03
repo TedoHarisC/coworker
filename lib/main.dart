@@ -10,6 +10,8 @@ import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'pages/list_worker_page.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Appwrite.init();
@@ -69,6 +71,11 @@ class MyApp extends StatelessWidget {
                 return const DashboardPage();
               });
         },
+        AppRoute.listWorker.name: (context) {
+          String category =
+              ModalRoute.of(context)!.settings.arguments.toString();
+          return ListWorkerPage(category: category);
+        }
       },
     );
   }
