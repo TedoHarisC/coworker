@@ -69,31 +69,239 @@ class _BrowserFragmentState extends State<BrowserFragment> {
         DView.height(30),
         highRatedWorkers(),
         DView.height(30),
+        newComers(),
+        DView.height(30),
+        curatedTips(),
+        DView.height(30),
       ],
     );
   }
 
-  Widget highRatedWorkers() {
+  Widget newComers() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionTitle(
+          text: 'New Comers',
+          autoPadding: true,
+        ),
+        DView.height(),
+        GridView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 74,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: browseController.newcomers.length,
+          itemBuilder: (context, index) {
+            Map comer = browseController.newcomers[index];
+            return Container(
+              width: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: const Color(0xffeaeaea),
+                ),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    comer['image'],
+                    width: 46,
+                    height: 46,
+                  ),
+                  DView.width(12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          comer['name'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          comer['job'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget curatedTips() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionTitle(text: 'High Rated Workers'),
-          DView.height(),
-          SizedBox(
-            height: 120,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: browseController.highRatedWorkers.length,
-              itemBuilder: (context, index) {
-                return null;
-              },
-            ),
+          const SectionTitle(
+            text: 'Curated Tips',
+          ),
+          Column(
+            children: browseController.curatedTips.map((item) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  children: [
+                    Stack(
+                      children: [
+                        Image.asset(
+                          item['image'],
+                          width: 70,
+                          height: 70,
+                        ),
+                        if (item['is_popular'])
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: Color(0xffBFA8FF),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(16),
+                                  bottomRight: Radius.circular(16),
+                                ),
+                              ),
+                              height: 24,
+                              child: const Text(
+                                'Popular',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1,
+                                ),
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                    DView.width(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item['name'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          item['category'],
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            }).toList(),
           )
         ],
       ),
+    );
+  }
+
+  Widget highRatedWorkers() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionTitle(
+          text: 'High Rated Workers',
+          autoPadding: true,
+        ),
+        DView.height(),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: browseController.highRatedWorkers.length,
+            itemBuilder: (context, index) {
+              Map worker = browseController.highRatedWorkers[index];
+              return Container(
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: const Color(0xffeaeaea),
+                  ),
+                ),
+                margin: EdgeInsets.only(
+                  left: index == 0 ? 20 : 8,
+                  right: index == browseController.highRatedWorkers.length - 1
+                      ? 20
+                      : 8,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      worker['image'],
+                      width: 46,
+                      height: 46,
+                    ),
+                    DView.height(6),
+                    Text(
+                      worker['name'],
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    DView.height(4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/ic_star_small.png',
+                          height: 16,
+                          width: 16,
+                        ),
+                        DView.width(2),
+                        Text(
+                          '${worker['rate']}',
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -189,7 +397,8 @@ class _BrowserFragmentState extends State<BrowserFragment> {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xffe5e7ec).withValues(alpha: 0.5),
+            //color: const Color(0xffe5e7ec).withValues(alpha: 0.5),
+            color: const Color(0xffe5e7ec).withAlpha(5),
             blurRadius: 30,
             offset: const Offset(0, 6),
           )

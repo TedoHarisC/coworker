@@ -38,7 +38,8 @@ class _InputAuthPasswordState extends State<InputAuthPassword> {
               BoxShadow(
                 blurRadius: 30,
                 offset: const Offset(0, 6),
-                color: const Color(0xffe5e7ec).withValues(alpha: 0.5),
+                //color: const Color(0xffe5e7ec).withValues(alpha: 0.5),
+                color: const Color(0xffe5e7ec).withAlpha(5),
               ),
             ],
           ),
