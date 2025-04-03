@@ -67,7 +67,33 @@ class _BrowserFragmentState extends State<BrowserFragment> {
         DView.height(50),
         latestStats(),
         DView.height(30),
+        highRatedWorkers(),
+        DView.height(30),
       ],
+    );
+  }
+
+  Widget highRatedWorkers() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionTitle(text: 'High Rated Workers'),
+          DView.height(),
+          SizedBox(
+            height: 120,
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: browseController.highRatedWorkers.length,
+              itemBuilder: (context, index) {
+                return null;
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 
