@@ -16,6 +16,13 @@ class _ListWorkerPageState extends State<ListWorkerPage> {
   final listWorkerController = Get.put(ListWorkerController());
 
   @override
+  void initState() {
+    // Showing list worker based on category from controller named fetchAvailable
+    listWorkerController.fetchAvailable(widget.category);
+    super.initState();
+  }
+
+  @override
   void dispose() {
     listWorkerController.clear();
     super.dispose();
