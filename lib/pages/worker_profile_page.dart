@@ -97,9 +97,9 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
                       return DView.nothing();
                     }
                     if (recruiterId == userController.data.$id) {
-                      return const Text('Hired by You');
+                      return hiredByYou();
                     }
-                    return const Text('Hired by Other');
+                    return hiredByOther();
                   }),
                 ],
               ),
@@ -138,6 +138,66 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Positioned hiredByYou() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Transform.translate(
+          offset: const Offset(0, 6),
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xffBFA8FF),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 4,
+            ),
+            child: const Text(
+              'HIRED BY YOU',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Positioned hiredByOther() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Transform.translate(
+          offset: const Offset(0, 6),
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xffFF7179),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 4,
+            ),
+            child: const Text(
+              'HIRED BY OTHER',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
