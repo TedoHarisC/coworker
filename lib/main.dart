@@ -2,10 +2,12 @@ import 'package:coworker/config/app_color.dart';
 import 'package:coworker/config/appwrite.dart';
 import 'package:coworker/config/enums.dart';
 import 'package:coworker/config/session.dart';
+import 'package:coworker/models/worker_model.dart';
 import 'package:coworker/pages/dashboard_page.dart';
 import 'package:coworker/pages/get_started_page.dart';
 import 'package:coworker/pages/sign_in_page.dart';
 import 'package:coworker/pages/sign_up_page.dart';
+import 'package:coworker/pages/worker_profile_page.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,8 +75,13 @@ class MyApp extends StatelessWidget {
         },
         AppRoute.listWorker.name: (context) {
           String category =
-              ModalRoute.of(context)!.settings.arguments.toString();
+              ModalRoute.of(context)!.settings.arguments as String;
           return ListWorkerPage(category: category);
+        },
+        AppRoute.workerProfile.name: (context) {
+          WorkerModel worker =
+              ModalRoute.of(context)!.settings.arguments as WorkerModel;
+          return WorkerProfilePage(worker: worker);
         }
       },
     );
