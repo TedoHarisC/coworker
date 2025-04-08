@@ -1,11 +1,14 @@
 import 'package:coworker/config/app_color.dart';
+import 'package:coworker/config/app_format.dart';
 import 'package:coworker/config/appwrite.dart';
 import 'package:coworker/controllers/user_controller.dart';
 import 'package:coworker/controllers/worker_profile_controller.dart';
 import 'package:coworker/models/worker_model.dart';
 import 'package:coworker/widgets/header_worker.dart';
+import 'package:coworker/widgets/section_title.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class WorkerProfilePage extends StatefulWidget {
@@ -42,8 +45,104 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
         padding: const EdgeInsets.all(0),
         children: [
           header(),
+          DView.height(90),
+          about(),
+          DView.height(30),
+          const SectionTitle(text: 'My Strength', autoPadding: true),
+          DView.height(8),
+          strength(context),
         ],
       ),
+    );
+  }
+
+  Column strength(BuildContext context) {
+    return Column(
+      children: widget.worker.strengths.map((e) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: 12,
+            right: 20,
+          ),
+          child: Row(
+            children: [
+              Radio(
+                visualDensity: const VisualDensity(
+                  vertical: -3,
+                  horizontal: -4,
+                ),
+                value: true,
+                groupValue: true,
+                onChanged: (value) {},
+                activeColor: Theme.of(context).primaryColor,
+              ),
+              Text(
+                e,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Column about() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SectionTitle(
+          text: 'About',
+          autoPadding: true,
+        ),
+        DView.height(8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            widget.worker.about,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        DView.height(8),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              RatingBar.builder(
+                initialRating: widget.worker.rating,
+                minRating: 1,
+                maxRating: 5,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemSize: 20,
+                itemPadding: const EdgeInsets.all(0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {},
+                ignoreGestures: true,
+              ),
+              DView.width(8),
+              Text(
+                '(${AppFormat.number(widget.worker.ratingCount)})',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
