@@ -1,10 +1,12 @@
 import 'package:coworker/config/app_color.dart';
 import 'package:coworker/config/app_format.dart';
 import 'package:coworker/config/appwrite.dart';
+import 'package:coworker/config/enums.dart';
 import 'package:coworker/controllers/user_controller.dart';
 import 'package:coworker/controllers/worker_profile_controller.dart';
 import 'package:coworker/models/worker_model.dart';
 import 'package:coworker/widgets/header_worker.dart';
+import 'package:coworker/widgets/secondary_button.dart';
 import 'package:coworker/widgets/section_title.dart';
 import 'package:d_view/d_view.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,19 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Obx(() {
+        String recruiterId = workerProfileController.recruiterId;
+        if (recruiterId == '') {
+          return DView.loadingCircle();
+        }
+        if (recruiterId == 'Available') {
+          return hireNow();
+        }
+        if (recruiterId == userController.data.$id) {
+          return hireByYou();
+        }
+        return hireByOther();
+      }),
       body: ListView(
         padding: const EdgeInsets.all(0),
         children: [
@@ -51,6 +66,103 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
           const SectionTitle(text: 'My Strength', autoPadding: true),
           DView.height(8),
           strength(context),
+        ],
+      ),
+    );
+  }
+
+  Widget hireNow() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  AppFormat.price(widget.worker.hourRate),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const Text('per hour'),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 200,
+            child: FilledButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRoute.booking.name,
+                  arguments: widget.worker,
+                );
+              },
+              child: const Text('Hire Now'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget hireByYou() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        children: [
+          Expanded(
+            child: SecondaryButton(
+              onPressed: () {},
+              child: const Text('Message'),
+            ),
+          ),
+          DView.width(),
+          Expanded(
+            child: FilledButton(
+              onPressed: () {},
+              child: const Text('Give Rating'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget hireByOther() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  AppFormat.price(widget.worker.hourRate),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const Text('per hour'),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 160,
+            child: SecondaryButton(
+              onPressed: () {},
+              child: const Text('Not Available'),
+            ),
+          ),
         ],
       ),
     );
@@ -196,9 +308,9 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
                       return DView.nothing();
                     }
                     if (recruiterId == userController.data.$id) {
-                      return hiredByYou();
+                      return hiredByYouText();
                     }
-                    return hiredByOther();
+                    return hiredByOtherText();
                   }),
                 ],
               ),
@@ -240,7 +352,7 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
     );
   }
 
-  Positioned hiredByYou() {
+  Positioned hiredByYouText() {
     return Positioned(
       bottom: 0,
       left: 0,
@@ -270,7 +382,7 @@ class _WorkerProfilePageState extends State<WorkerProfilePage> {
     );
   }
 
-  Positioned hiredByOther() {
+  Positioned hiredByOtherText() {
     return Positioned(
       bottom: 0,
       left: 0,
