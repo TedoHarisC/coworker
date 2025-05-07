@@ -1,3 +1,4 @@
+import 'package:coworker/config/enums.dart';
 import 'package:coworker/controllers/fragments/browser_controller.dart';
 import 'package:coworker/controllers/user_controller.dart';
 import 'package:coworker/widgets/section_title.dart';
@@ -451,7 +452,13 @@ class _BrowserFragmentState extends State<BrowserFragment> {
         itemBuilder: (context, index) {
           Map category = browseController.categories[index];
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                AppRoute.listWorker.name,
+                arguments: category['label'],
+              );
+            },
             child: Container(
               margin: EdgeInsets.only(
                 left: index == 0 ? 20 : 8,
