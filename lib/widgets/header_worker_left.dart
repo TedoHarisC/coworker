@@ -55,7 +55,7 @@ class HeaderWorkerLeft extends StatelessWidget {
               ],
             ),
           ),
-          const IconButton(
+          const IconButton.filled(
             onPressed: null,
             icon: Icon(
               Icons.abc,
