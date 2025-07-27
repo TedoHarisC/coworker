@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
-  clear() {
+  void clear() {
     Get.delete<SignUpController>(force: true);
   }
 
@@ -16,7 +16,7 @@ class SignUpController extends GetxController {
   bool get loading => _loading.value;
   set loading(bool n) => _loading.value = n;
 
-  execute(BuildContext context) {
+  void execute(BuildContext context) {
     // Pengecekan validasi name
     if (edtName.text == '') {
       AppInfo.failed(context, "Nama wajib diisi");

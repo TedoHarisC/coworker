@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignInController extends GetxController {
-  clear() {
+  void clear() {
     Get.delete<SignInController>(force: true);
   }
 
@@ -17,7 +17,7 @@ class SignInController extends GetxController {
   bool get loading => _loading.value;
   set loading(bool n) => _loading.value = n;
 
-  execute(BuildContext context) {
+  void execute(BuildContext context) {
     // Pengecekan validasi email
     if (edtEmail.text == '') {
       AppInfo.failed(context, "Email wajib diisi");

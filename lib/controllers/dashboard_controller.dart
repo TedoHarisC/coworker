@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../pages/fragments/setting_fragment.dart';
 
 class DashboardController extends GetxController {
-  clear() {
+  void clear() {
     Get.delete<DashboardController>(force: true);
   }
 

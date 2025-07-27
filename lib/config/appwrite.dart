@@ -15,7 +15,7 @@ class Appwrite {
   static late Account account;
   static late Databases databases;
 
-  static init() {
+  static void init() {
     client
         .setEndpoint(endPoint)
         .setProject(projectId)

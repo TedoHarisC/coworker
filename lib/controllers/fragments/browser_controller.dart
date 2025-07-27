@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class BrowserController extends GetxController {
-  clear() {
+  void clear() {
     Get.delete<BrowserController>(force: true);
   }
 

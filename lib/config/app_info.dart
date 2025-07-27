@@ -2,11 +2,11 @@ import 'package:d_info/d_info.dart';
 import 'package:flutter/material.dart';
 
 class AppInfo {
-  static toastSucces(String message) {
+  static void toastSucces(String message) {
     DInfo.toastSuccess(message);
   }
 
-  static success(BuildContext context, String message) {
+  static void success(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -20,7 +20,7 @@ class AppInfo {
     );
   }
 
-  static failed(BuildContext context, String message) {
+  static void failed(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(

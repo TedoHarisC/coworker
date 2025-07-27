@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class BookingController extends GetxController {
   static BookingController get to => Get.find();
 
-  clear() {
+  void clear() {
     Get.delete<BookingController>(force: true);
   }
 
@@ -13,7 +13,7 @@ class BookingController extends GetxController {
   final hourDuration = [5, 10, 15, 25, 40, 100];
   final _duration = 10.obs;
   int get duration => _duration.value;
-  setDuration(int n, double hourRate) {
+  void setDuration(int n, double hourRate) {
     _duration.value = n;
   }
 
@@ -37,7 +37,7 @@ class BookingController extends GetxController {
 
   BookingModel get bookingDetail => _bookingDetail.value;
 
-  initBookingDetail(String userId, WorkerModel worker) {
+  void initBookingDetail(String userId, WorkerModel worker) {
     _bookingDetail.value = BookingModel(
       userId: userId,
       workerId: worker.$id,

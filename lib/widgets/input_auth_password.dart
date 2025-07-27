@@ -18,7 +18,7 @@ class InputAuthPassword extends StatefulWidget {
 class _InputAuthPasswordState extends State<InputAuthPassword> {
   bool hide = true;
 
-  setHide() {
+  void setHide() {
     hide = !hide;
     setState(() {});
   }

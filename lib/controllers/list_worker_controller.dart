@@ -3,7 +3,7 @@ import 'package:coworker/models/worker_model.dart';
 import 'package:get/get.dart';
 
 class ListWorkerController extends GetxController {
-  clear() {
+  void clear() {
     Get.delete<ListWorkerController>(force: true);
   }
 
@@ -38,7 +38,7 @@ class ListWorkerController extends GetxController {
   String get statusFetch => _statusFetch.value;
   set statusFetch(String n) => _statusFetch.value = n;
 
-  fetchAvailable(String category) {
+  void fetchAvailable(String category) {
     statusFetch = 'Loading';
     WorkerDatasource.fetchAvailable(category).then((value) {
       value.fold(
